@@ -1,3 +1,68 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: black;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+}
+
 .error {
   color: red;
+}
+
+#search-area {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#search-bar,
+#search-btn {
+  border: none;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  text-align: center;
+  width: 90%;
+}
+
+#search-bar {
+  cursor: text;
+}
+
+#search-btn {
+  border: 1px solid white;
+  background-color: black;
+  color: #fff;
+  cursor: pointer;
+}
+
+#search-btn:hover {
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+}
+
+#results-area {
+  width: 90%;
+}
+
+#results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* flex-wrap: wrap; */
+  list-style: none;
+}
+
+.bookInfo {
+  border: 1px solid white;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
 }
