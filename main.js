@@ -7,7 +7,7 @@ function showError(msg) {
 // Searches for books and returns a promise that resolves a JSON list
 function searchForBooks(term) {
   // TODO
-  const apikey = "&key=AIzaSyADufvIDuhYx6RnfZ9afvB98RXx85YMdzU";
+
   const apiurl = `https://www.googleapis.com/books/v1/volumes?q=${term}${apikey}`;
 
   return fetch(`${apiurl}`)
