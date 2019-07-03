@@ -21,14 +21,14 @@ function render() {
   const searchTerm = document.getElementById("search-bar").value;
   searchForBooks(searchTerm).then(function(data) {
     let bookData = data.items;
-    console.log(bookData);
-    for (let i = 0; i < data.items.length; i++) {
-      let bookImage = data.items[i].volumeInfo.imageLinks.thumbnail;
-      let bookTitle = data.items[i].volumeInfo.title;
-      let bookSubtitle = data.items[i].volumeInfo.subtitle;
-      let bookAuthors = data.items[i].volumeInfo.authors;
-      let googleBooksURL = "https://books.google.com/books?id=";
-      let bookID = data.items[i].id;
+
+    for (let book of bookData) {
+      let bookImage = book.volumeInfo.imageLinks.thumbnail;
+      let bookTitle = book.volumeInfo.title;
+      let bookSubtitle = book.volumeInfo.subtitle;
+      let bookAuthors = book.volumeInfo.authors;
+      let bookID = book.id;
+      let googleBooksURL = `https://books.google.com/books?id=${bookID}`;
 
       if (bookSubtitle === undefined) {
         bookSubtitle = "N/A";
@@ -38,31 +38,31 @@ function render() {
       } else {
         bookAuthors = bookAuthors.join(", ");
       }
-      // for (let j = 0; j < data.items.length; j++) {
-      //   if (bookID === data.items[j].id) {
-      //     console.log("dupe");
-      //   }
-      // }
 
-      if (bookData < data.items.length) {
-        let li = document.createElement("li");
-        li.innerHTML = `<img src=${bookImage} class="bookImage"> 
-      <p>Book Title: ${bookTitle}</p> 
-      <p>Book Subtitle: ${bookSubtitle}</p> 
-      <p>Book Authors: ${bookAuthors}</p>
-      <a src="${googleBooksURL + bookID}>More Information</a>`;
-        li.classList.add("bookInfo");
-        document.getElementById("results").append(li);
-      } else {
-        li.innerHTML = `<img src=${bookImage} class="bookImage"> 
-        <p>Book Title: ${bookTitle}</p> 
-        <p>Book Subtitle: ${bookSubtitle}</p> 
-        <p>Book Authors: ${bookAuthors}</p>
-        <a src="${googleBooksURL + bookID}>More Information</a>`;
-      }
+      let li = document.createElement("li");
+      li.innerHTML = `
+      <img src=${bookImage} class="bookImage">
+      <div class="bookInfo">
+        <label> Title: </label>
+        <p>${bookTitle}</p>
+        <label> Subtitle: </label>
+        <p>${bookSubtitle}</p>
+        <label> Author(s): </label>
+        <p>${bookAuthors}</p>
+      </div>
+      <a href="${googleBooksURL}" target="_blank" class="bookLink">Learn More!</a>`;
+      li.classList.add("book");
+      document.getElementById("results").append(li);
     }
-    console.log(data);
   });
 }
 
+document
+  .getElementById("search-bar")
+  .addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      render();
+    }
+  });
 document.getElementById("search-btn").addEventListener("click", render);
