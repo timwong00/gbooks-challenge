@@ -1,5 +1,3 @@
-let bookArray = [];
-let bookIDArray = [];
 // Renders an error message
 function showError(msg) {
   const html = `<li><p class="error">${msg}</p></li>`;
